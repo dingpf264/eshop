@@ -241,4 +241,11 @@ public class AdminProductAction implements ModelDriven<Product>{
 		adminProductService.delete(product);
 		return "delete";
 	}
+	
+	//findPageProductsByName
+	public String findPageProductsByName() throws Exception{
+		PageBean<Product> products = adminProductService.findPageProductsByName(product.getPname(),currentPage);
+		ActionContext.getContext().getValueStack().set("pList", products);
+		return "findPageProductsByName";
+	}
 }

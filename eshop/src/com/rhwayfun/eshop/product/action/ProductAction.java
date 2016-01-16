@@ -15,7 +15,16 @@ public class ProductAction extends ActionSupport {
 	private int cid;
 	private int csid;
 	private int currentPage;
+	private String pname;
 	
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
 	public int getCsid() {
 		return csid;
 	}
@@ -77,5 +86,11 @@ public class ProductAction extends ActionSupport {
 		request.put("pageProducts2", products);
 //		ActionContext.getContext().getValueStack().set("pageProducts", products);
 		return "pageProducts2";
+	}
+	
+	public String findPageProductsByName() throws Exception{
+		PageBean<Product> products = productService.findPageProductsByName(pname,currentPage);
+		ActionContext.getContext().getValueStack().set("pList", products);
+		return "findPageProductsByName";
 	}
 }

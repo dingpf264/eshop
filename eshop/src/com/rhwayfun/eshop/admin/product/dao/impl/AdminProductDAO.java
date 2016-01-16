@@ -54,4 +54,28 @@ public class AdminProductDAO extends HibernateDaoSupport implements
 	public void delete(Product product) {
 		this.getHibernateTemplate().delete(product);
 	}
+	
+	@Override
+	public List<Product> findPageProductsByName(String pname, int startIndex,
+			int pageSize) {
+		String hql = "select p from Product p where p.pname like " + "'%" + pname +"%'";
+		List<Product> list = this.getHibernateTemplate().execute(
+				new PageHibernateCallback<Product>(hql, null,
+						startIndex, pageSize));
+		if (list != null && list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public int findCountByPname(String pname) {
+		String hql = "select count(*) from Product where pname like " + "'%" + pname +"%'";
+		List<Long> list = this.getHibernateTemplate().find(hql);
+		if (list != null && list.size() > 0) {
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
 }

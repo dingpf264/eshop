@@ -13,5 +13,6 @@ public interface IProductService {
 	PageBean<Product> findPageProductsByCategory(int cid,int currentPage);
 	PageBean<Product> findPageProductsByCategorysecond(int csid,int currentPage);
 	Product findProductByPid(int pid);
+	PageBean<Product> findPageProductsByName(String pname, int currentPage);
 	
 }

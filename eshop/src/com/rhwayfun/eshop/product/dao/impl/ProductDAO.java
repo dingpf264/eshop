@@ -75,7 +75,7 @@ public class ProductDAO extends HibernateDaoSupport implements IProductDAO {
 		List<Product> list = this.getHibernateTemplate().execute(
 				new PageHibernateCallback<Product>(hql, new Object[] { csid },
 						startIndex, pageSize));
-		if(list != null && list.size() > 0){
+		if (list != null && list.size() > 0) {
 			return list;
 		}
 		return null;
@@ -95,10 +95,34 @@ public class ProductDAO extends HibernateDaoSupport implements IProductDAO {
 	public Product findProductByPid(int pid) {
 		String hql = "from Product where pid = ?";
 		List list = this.getHibernateTemplate().find(hql, pid);
-		if(list != null && list.size() > 0){
+		if (list != null && list.size() > 0) {
 			return (Product) list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Product> findPageProductsByName(String pname, int startIndex,
+			int pageSize) {
+		String hql = "select p from Product p where p.pname like " + "'%" + pname +"%'";
+		List<Product> list = this.getHibernateTemplate().execute(
+				new PageHibernateCallback<Product>(hql, null,
+						startIndex, pageSize));
+		if (list != null && list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public int findCountByPname(String pname) {
+		String hql = "select count(*) from Product where pname like " + "'%" + pname +"%'";
+		List<Long> list = this.getHibernateTemplate().find(hql);
+		if (list != null && list.size() > 0) {
+			return list.get(0).intValue();
+		}
+		return 0;
 	}
 
 }

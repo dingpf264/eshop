@@ -77,7 +77,7 @@ else
 // -->
 									</script> </font>
 							</td>
-							<td width="15%">
+							<td width="18%">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="16"
@@ -86,16 +86,11 @@ else
 												src="${pageContext.request.contextPath}/images/mis_05a.jpg"
 												width="6" height="18">
 										</td>
-										<td width="155" valign="bottom"
-											background="${pageContext.request.contextPath}/images/mis_05b.jpg">
+										<td width="155px" valign="bottom">
 											用户名：
 											<font color="blue"><s:property value="#session.adminuser.username"/></font>
-											&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;
 											<a href="adminUser_logout.action" style="text-decoration: none;">注销</a>
-										</td>
-										<td width="10" align="right"
-											background="${pageContext.request.contextPath}/images/mis_05b.jpg">
-											<img src="${pageContext.request.contextPath}/images/mis_05c.jpg" width="6" height="18">
 										</td>
 									</tr>
 								</table>

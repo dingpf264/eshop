@@ -14,4 +14,7 @@ public interface IProductDAO {
 	List<Product> findPageProductsByCategorysecond(int csid,int startIndex,int pageSize);
 	int findCountByCsid(int csid);
 	Product findProductByPid(int pid);
+	List<Product> findPageProductsByName(String pname, int startIndex,
+			int pageSize);
+	int findCountByPname(String pname);
 }

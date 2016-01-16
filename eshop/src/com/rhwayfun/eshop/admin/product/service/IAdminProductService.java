@@ -14,4 +14,6 @@ public interface IAdminProductService {
 	void update(Product product);
 
 	void delete(Product product);
+
+	PageBean<Product> findPageProductsByName(String pname, int currentPage);
 }

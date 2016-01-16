@@ -17,4 +17,9 @@ public interface IAdminProductDAO {
 	void update(Product product);
 
 	void delete(Product product);
+
+	int findCountByPname(String pname);
+
+	List<Product> findPageProductsByName(String pname, int startIndex,
+			int pageSize);
 }

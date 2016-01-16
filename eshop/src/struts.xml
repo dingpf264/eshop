@@ -62,6 +62,7 @@
 			<result name="product">/WEB-INF/jsp/product.jsp</result>
 			<result name="pageProducts">/WEB-INF/jsp/productsPageList.jsp</result>
 			<result name="pageProducts2">/WEB-INF/jsp/productsPageList2.jsp</result>
+			<result name="findPageProductsByName">/WEB-INF/jsp/productsPageQueryList.jsp</result>
 		</action>
 		
 		<!-- 配置购物车模块 -->
@@ -131,6 +132,7 @@
 			<result name="edit">/admin/product/edit.jsp</result>
 			<result name="update" type="redirectAction">adminProduct_findAllByPage.action?currentPage=1</result>
 			<result name="delete" type="redirectAction">adminProduct_findAllByPage.action?currentPage=1</result>
+			<result name="findPageProductsByName">/admin/product/queryList.jsp</result>
 			<interceptor-ref name="AdminLoginStack"></interceptor-ref>
 		</action>
 		

@@ -10,6 +10,15 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	.tableBorder2{width:97%;border: 1px #DEDEDE solid; background-color: #EFEFEF;}
+</style>
+<script type="text/javascript">
+	function search() {
+		var name = document.getElementById("name").value;
+		location.href = "product_findPageProductsByName?pname=" + name + "&currentPage=1";
+	}
+</script>
 </head>
 
 <body>
@@ -61,6 +70,21 @@
 			<div class="phone">
 				客服热线: <strong>96008/53277764</strong>
 			</div>
+		</div>
+		<div>
+			<img src="${pageContext.request.contextPath }/image/year.png" alt="" style="width: 1200px; height: 110px; position: relative; left: -90px;">
+		</div>
+		<div style="width:618px;height:50px;margin:20px 30px 20px 160px;">
+			<table cellspacing=1 cellpadding=3 align=center class=tableBorder2>
+				<tr>
+					<td height=40 valign=middle align=left >
+				      <input style="line-height:40px; font-size:14px;border-color: red;border-style: solid;border-width: 1px;" type="text" id="name" size="70" height="50px" placeholder="请输入您要查询的商品名称"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    </td>
+				    <td height=40 valign=middle align=left>
+				      <input type="button" value="搜索" style="line-height:40px;font-size:18px;height:40px" onclick="search()"/>
+				    </td>
+				</tr>
+			</table>
 		</div>
 		<div class="span24">
 			<ul class="mainNav">
