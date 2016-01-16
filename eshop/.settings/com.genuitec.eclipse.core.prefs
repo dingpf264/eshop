@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js,WebRoot/WEB-INF/weblogic.xml,WebRoot/js/ckeditor.js,WebRoot/ckeditor/ckeditor.js,WebRoot/ckeditor/samples/toolbarconfigurator/js/toolbartextmodifier.js,WebRoot/ckeditor/samples/toolbarconfigurator/js/toolbarmodifier.js
+validator.Unchecked=
