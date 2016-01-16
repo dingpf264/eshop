@@ -2,6 +2,8 @@ package com.rhwayfun.eshop.admin.categorysecond.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.rhwayfun.eshop.admin.categorysecond.dao.ICategorySecondDAO;

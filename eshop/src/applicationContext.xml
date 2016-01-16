@@ -32,6 +32,9 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
+		<property name="schemaUpdate">
+			<value>true</value>
+		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
@@ -71,34 +74,34 @@
 		scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
-	<bean id="productAction" class="com.rhwayfun.eshop.product.action.ProductAction">
+	<bean id="productAction" class="com.rhwayfun.eshop.product.action.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
 	</bean>
-	<bean id="cartAction" class="com.rhwayfun.eshop.cart.action.CartAction">
+	<bean id="cartAction" class="com.rhwayfun.eshop.cart.action.CartAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
 	</bean>
-	<bean id="orderAction" class="com.rhwayfun.eshop.orders.action.OrderAction">
+	<bean id="orderAction" class="com.rhwayfun.eshop.orders.action.OrderAction" scope="prototype">
 		<property name="orderService" ref="orderService"></property>
 		<property name="userService" ref="userService"></property>
 	</bean>
-	<bean id="adminUserAction" class="com.rhwayfun.eshop.admin.user.action.AdminUserAction">
+	<bean id="adminUserAction" class="com.rhwayfun.eshop.admin.user.action.AdminUserAction" scope="prototype">
 		<property name="adminUserService" ref="adminUserService"></property>
 	</bean>
-	<bean id="adminCategoryAction" class="com.rhwayfun.eshop.admin.category.action.AdminCategoryAction">
+	<bean id="adminCategoryAction" class="com.rhwayfun.eshop.admin.category.action.AdminCategoryAction" scope="prototype">
 		<property name="adminCategoryService" ref="adminCategoryService"></property>
 	</bean>
-	<bean id="categorySecondAction" class="com.rhwayfun.eshop.admin.categorysecond.action.CategorySecondAction">
+	<bean id="categorySecondAction" class="com.rhwayfun.eshop.admin.categorysecond.action.CategorySecondAction" scope="prototype">
 		<property name="categorySecondService" ref="categorySecondService"></property>
 		<property name="categoryService" ref="adminCategoryService"></property>
 	</bean>
-	<bean id="adminProductAction" class="com.rhwayfun.eshop.admin.product.action.AdminProductAction">
+	<bean id="adminProductAction" class="com.rhwayfun.eshop.admin.product.action.AdminProductAction" scope="prototype">
 		<property name="adminProductService" ref="adminProductService"></property>
 		<property name="categorySecondService" ref="categorySecondService"></property>
 	</bean>
-	<bean id="adminOrderAction" class="com.rhwayfun.eshop.admin.order.action.AdminOrderAction">
+	<bean id="adminOrderAction" class="com.rhwayfun.eshop.admin.order.action.AdminOrderAction" scope="prototype">
 		<property name="adminOrderService" ref="adminOrderService"></property>
 	</bean>
-	<bean id="sellerAction" class="com.rhwayfun.eshop.admin.user.action.SellerAction">
+	<bean id="sellerAction" class="com.rhwayfun.eshop.admin.user.action.SellerAction" scope="prototype">
 		<property name="adminUserService" ref="adminUserService"></property>
 	</bean>
 
@@ -168,27 +171,4 @@
 	<!-- 开启注解事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<!-- <bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="find*" propagation="REQUIRED" />
-			<tx:method name="get*" propagation="REQUIRED" />
-			<tx:method name="apply*" propagation="REQUIRED" />
-			<tx:method name="insert*" propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
-	
-	配置参与事务的实现类
-	<aop:config>
-		<aop:pointcut id="serviceMethod"
-			expression="execution(* com.rhwayfun.eshop.*.[*].service.impl.*.*(..))" />
-		<aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice" />
-	</aop:config> -->
 </beans>

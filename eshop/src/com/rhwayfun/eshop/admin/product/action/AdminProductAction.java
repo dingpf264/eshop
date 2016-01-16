@@ -30,7 +30,7 @@ public class AdminProductAction implements ModelDriven<Product>{
 		return product;
 	}
 	
-	private int currentPage;
+	private int currentPage = 1;
 	private File pic;
 	private String picFileName;
 	private File[] file; // 文件

@@ -53,7 +53,7 @@
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%"><s:property value="#status.count" /></td>
+										width="18%">${status.count }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="17%"><s:property value="#c.csname" /></td>
 									<td align="center" style="HEIGHT: 22px"><a

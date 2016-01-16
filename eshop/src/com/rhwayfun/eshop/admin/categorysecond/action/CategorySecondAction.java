@@ -79,7 +79,6 @@ public class CategorySecondAction implements ModelDriven<Categorysecond>{
 	}
 	
 	public String update() throws Exception{
-		categorysecond = categorySecondService.findByCsid(categorysecond.getCsid());
 		categorySecondService.update(categorysecond);
 		return "update";
 	}

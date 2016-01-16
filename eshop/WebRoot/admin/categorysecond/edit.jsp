@@ -8,7 +8,7 @@
 	</HEAD>
 	
 	<body>
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminCategorySecond_update.action" method="post">
+		<form id="userAction_save_do" name="Form1" action="adminCategorySecond_update.action" method="post">
 			<input type="hidden" name="csid" value="<s:property value="model.csid"/>"/>
 			&nbsp;
 			<table cellSpacing="1" cellPadding="5" width="100%" align="center" bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
