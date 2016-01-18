@@ -26,13 +26,21 @@ public class OrderAction{
 	
 	private static final long serialVersionUID = 1L;
 
-	private int currentPage;
-	private int userid;
+	private int currentPage = 1;
 	private int oid;
 	private String address;
 	private String name;
 	private String phone;
+	private String p;
 	
+	public String getP() {
+		return p;
+	}
+
+	public void setP(String p) {
+		this.p = p;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -81,13 +89,6 @@ public class OrderAction{
 	public void setR6_Order(String r6_Order) {
 		this.r6_Order = r6_Order;
 	}
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -121,6 +122,12 @@ public class OrderAction{
 		//如果为空，直接跳转到登录页面
 		if(cart == null){
 			return "login";
+		}
+		System.out.println("p:" + p);
+		//首先需要移除未被选中的商品
+		String[] ps = p.split(",");
+		for (String pIndex : ps) {
+			cart.remove(Integer.valueOf(pIndex));
 		}
 		//获取购物车的购物项
 		for(CartItem cartItem : cart.getCartItems()){
@@ -223,18 +230,18 @@ public class OrderAction{
 	
 	//获取用户所有的订单
 	public String findOrders() throws Exception{
-		PageBean<Orders> orders = orderService.findPageOrdersByUid(userid,currentPage);
-		Map request = (Map) ActionContext.getContext().get("request");
-		request.put("orders", orders);
+		// 获得用户的id.
+		User existUser = (User) ActionContext.getContext().getSession().get("user");
+		// 获得用户的id
+		Integer uid = existUser.getUserid();
+		PageBean<Orders> orders = orderService.findPageOrdersByUid(uid,currentPage);
+		ActionContext.getContext().getValueStack().set("orders", orders);
 		return "findOrders";
 	}
 	
 	//根据订单编号删除订单
 	public String deleteOrderByOid() throws Exception{
 		orderService.deleteOrderByOid(oid);
-		PageBean<Orders> orders = orderService.findPageOrdersByUid(userid,currentPage);
-		Map request = (Map) ActionContext.getContext().get("request");
-		request.put("orders", orders);
 		return "deleteOrderByOid";
 	}
 	

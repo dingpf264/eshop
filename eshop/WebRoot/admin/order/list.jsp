@@ -13,6 +13,23 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/js/public.js"></script>
 <script type="text/javascript">
+	window.onload = function(){
+		var oTable = document.getElementById("oTable");
+		var trList = oTable.getElementsByTagName("tr");
+		for(var i = 0; i < trList.length; i++){
+			if(i % 2 == 0){
+				trList[i].style.backgroundColor = "#ccc";
+				trList[i].onmouseout = function(){
+					this.style.background = "#ccc";
+				};
+			}else{
+				trList[i].style.backgroundColor = "#fff";
+				trList[i].onmouseover = function(){
+					this.style.background = "#fff";
+				};
+			}
+		}
+	};
 	function showOrderDetail(oid){
 		var but = $("but" + oid);
 		var div1 = $("div"+oid);
@@ -76,6 +93,7 @@
 								<td align="center" width="8%">地址</td>
 								<td align="center" width="8%">订单详情</td>
 							</tr>
+							<table id="oTable">
 							<s:iterator var="o" value="oList.list" status="status">
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
@@ -88,16 +106,16 @@
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="12%">
 										<s:if test="#o.state == 1">
-											未付款
+											<font color="black">未付款</font>
 										</s:if>
 										<s:elseif test="#o.state == 2">
 											<a href="adminOrder_updateState.action?oid=<s:property value="#o.oid"/>" style="text-decoration: none;"><font color="red">发货</font></a>
 										</s:elseif>
 										<s:elseif test="#o.state == 3">
-											确认收货
+											<font color="blue">确认收货</font>
 										</s:elseif>
 										<s:elseif test="#o.state == 4">
-											交易完成
+											<font color="green">交易完成</font>
 										</s:elseif>
 									</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
@@ -113,9 +131,10 @@
 									</td>
 								</tr>
 							</s:iterator>
+							</table>
 							<tr>
 								<td colspan="4" style="text-align: center;">
-									<div class="pagination">
+									<div class="pagination" style="margin:15px 400px;">
 										<s:set value="oList" id="oList"></s:set>
 										<s:if test="#oList != null">
 											<span>第 <s:property value="%{#oList.currentPage}" />/<s:property

@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -17,7 +20,9 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.rhwayfun.eshop.admin.categorysecond.service.ICategorySecondService;
 import com.rhwayfun.eshop.admin.product.service.IAdminProductService;
+import com.rhwayfun.eshop.category.entity.Category;
 import com.rhwayfun.eshop.category.entity.Categorysecond;
+import com.rhwayfun.eshop.category.service.ICategoryService;
 import com.rhwayfun.eshop.product.entity.Product;
 import com.rhwayfun.eshop.utils.PageBean;
 
@@ -37,7 +42,25 @@ public class AdminProductAction implements ModelDriven<Product>{
 	private String[] fileFileName; // 文件名
 	private String[] filePath; // 文件路径
 	private InputStream inputStream;
+	private int cid;
+	private String data;
 	
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public Integer getCid(){
+		return cid;
+	}
+	
+	public void setCid(int cid){
+		this.cid = cid;
+	}
+
 	public File[] getFile() {
 		return file;
 	}
@@ -96,7 +119,12 @@ public class AdminProductAction implements ModelDriven<Product>{
 
 	private IAdminProductService adminProductService;
 	private ICategorySecondService categorySecondService;
+	private ICategoryService categoryService;
 	
+	public void setCategoryService(ICategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+
 	public void setCategorySecondService(
 			ICategorySecondService categorySecondService) {
 		this.categorySecondService = categorySecondService;
@@ -116,10 +144,13 @@ public class AdminProductAction implements ModelDriven<Product>{
 	}
 
 	public String addPage() throws Exception{
+		//获取所有的一级分类实现联动效果
+		List<Category> cList = categoryService.findAll();
 		//获取所有的二级分类
 		List<Categorysecond> csList = categorySecondService.findAll();
 		Map request = (Map) ActionContext.getContext().get("request");
 		request.put("csList", csList);
+		request.put("cList", cList);
 		return "addPage";
 	}
 	
@@ -247,5 +278,34 @@ public class AdminProductAction implements ModelDriven<Product>{
 		PageBean<Product> products = adminProductService.findPageProductsByName(product.getPname(),currentPage);
 		ActionContext.getContext().getValueStack().set("pList", products);
 		return "findPageProductsByName";
+	}
+
+	//findCs
+	public String findCs() throws Exception{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		List<Categorysecond> csList = categorySecondService.findCs(cid);
+		System.out.println("list:" + csList);
+		StringBuilder sb = new StringBuilder();
+		for (Categorysecond cs : csList) {
+			sb.append(cs.getCsid() + ":" + cs.getCsname());
+			sb.append("|");
+		}
+		data = sb.toString().substring(0,sb.toString().lastIndexOf("|"));
+		System.out.println("data:" + data);
+		ServletActionContext.getResponse().getWriter().print(data);
+		
+		/*out.println("document.getElementById('csList').length=" + csList.size());
+		out.println("document.getElementById('csList').selectedIndex=0");
+		for(int i = 0 ; i < csList.size(); i++){
+			Categorysecond cs = csList.get(i);
+			out.println("document.getElementById('csSelect').options[" + i +"].value=" + cs.getCsid() 
+				+ "");
+			out.println("document.getElementById('csSelect').options[" + i +"].text=" + cs.getCsname() 
+				+ "");
+		}	*/
+
+		return null;
 	}
 }

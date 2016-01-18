@@ -38,15 +38,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td colspan="6">
 								<font style="font-weight: bold;">订单信息：</font><br/>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								订单编号：<s:property value="#order.oid"/>&nbsp;&nbsp;
+								订单编号：<s:property value="#order.oid"/>&nbsp;&nbsp;<br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;
 								创建时间：<s:date name="#order.ordertime" format="yyyy年MM月dd日 HH:mm:ss"/><br/>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<s:if test="#order.state == 3">
-									发货时间：<s:date name="#order.deliverytime" format="yyyy年MM月dd日 HH:mm:ss"/>
-								</s:if>
-								<s:elseif test="#order.state == 2">
+								<s:if test="#order.state > 1">
 									付款时间：<s:date name="#order.paytime" format="yyyy年MM月dd日 HH:mm:ss"/>
-								</s:elseif>
+									&nbsp;&nbsp;<br/>
+									<s:if test="#order.state > 2">
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										发货时间：<s:date name="#order.deliverytime" format="yyyy年MM月dd日 HH:mm:ss"/>
+									</s:if>
+								</s:if>
 							</td>
 						</tr>
 						<br/><hr/>

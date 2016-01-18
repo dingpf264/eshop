@@ -18,4 +18,6 @@ public interface ICategorySecondService {
 	void update(Categorysecond categorysecond);
 
 	List<Categorysecond> findAll();
+
+	List<Categorysecond> findCs(int cid);
 }

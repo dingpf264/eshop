@@ -10,6 +10,38 @@
 		<script src="${pageContext.request.contextPath}/ckeditor/samples/js/sample.js"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ckeditor/samples/css/samples.css">
 		<LINK href="${pageContext.request.contextPath}/css/Style1.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript">
+				function findCs() {
+					var cid = document.getElementById("cSelect").value;
+					//创建xmlhttp对象
+					var xmlhttp = null;
+					if(window.XMLHttpRequest){
+						xmlhttp = new XMLHttpRequest();
+					}else if(window.ActiveXObject){
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					var url = "${pageContext.request.contextPath}/adminProduct_findCs.action?cid=" + cid + "&time=" + new Date().getTime();
+					xmlhttp.open("GET", url,true);
+					xmlhttp.onreadystatechange = function(){
+						if (xmlhttp.readyState == 4) {
+							if (xmlhttp.status == 200) {
+								var data = xmlhttp.responseText;
+								var csSelect = document.getElementById("csSelect");
+								csSelect.options.length = 0;
+								var tmp = data.split("|");
+								for (var i = 0; i <= tmp.length; i++) {
+									var csid = tmp[i].substring(0,tmp[i].lastIndexOf(":"));
+									var csname = tmp[i].substring(tmp[i].lastIndexOf(":") + 1);
+									var op = new Option(csname, csid);
+									csSelect.options.add(op);
+									//csSelect.append("<option value='"+ csid +"'>"+ csname +"</option>");
+								};
+							};
+						};
+					};
+					xmlhttp.send(null);
+				}
+		</script>
 	</HEAD>
 	<body id="main">
 		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminProduct_save.action?currentPage=1" method="post" enctype="multipart/form-data">
@@ -36,10 +68,18 @@
 						所属二级分类：
 					</td>
 					<td class="ta_01" bgColor="#ffffff" colspan="3">
-						<select name="categorysecond.csid">
-							<s:iterator value="#request.csList" id="c">
-								<option value="<s:property value="#c.csid"/>"><s:property value="#c.csname"/></option>
+						<select id="cSelect" onchange="findCs(this)">
+							<option>--请选择一级分类--</option>
+							<s:set value="#request.cList" id="cList"></s:set>
+							<s:iterator value="#cList" id="c1">
+								<option value="<s:property value="#c1.cid"/>"><s:property value="#c1.cname"/></option>
 							</s:iterator>
+						</select>
+						<select name="categorysecond.csid" id="csSelect">
+							<%-- <s:iterator value="#request.csList" id="c">
+								<option value="<s:property value="#c.csid"/>"><s:property value="#c.csname"/></option>
+							</s:iterator> --%>
+							<option>--请选择二级分类--</option>
 						</select>
 					</td>
 				</tr>

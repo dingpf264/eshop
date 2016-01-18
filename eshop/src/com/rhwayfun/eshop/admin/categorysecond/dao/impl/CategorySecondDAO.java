@@ -72,4 +72,13 @@ public class CategorySecondDAO extends HibernateDaoSupport implements
 		return null;
 	}
 
+	@Override
+	public List<Categorysecond> findCs(int cid){
+		String hql = "select cs from Categorysecond cs where cs.category.cid = ?";
+		List<Categorysecond> list = this.getHibernateTemplate().find(hql,cid);
+		if(list != null && list.size() > 0){
+			return list;
+		}
+		return null;
+	}
 }

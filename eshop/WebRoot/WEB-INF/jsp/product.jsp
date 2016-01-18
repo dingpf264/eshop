@@ -3,7 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,7 +12,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/product.css"
 	rel="stylesheet" type="text/css">
-
+		<script type="text/javascript">
+			function add(){
+				document.getElementById("count").value++;
+			}
+			function reduce(){
+				if(document.getElementById("count").value > 1){
+					document.getElementById("count").value--;
+				}else{
+					document.getElementById("count").value = 1;
+				}
+			}
+		</script>
 </head>
 <body>
 
@@ -105,8 +115,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input id="count" name="count" value="1" maxlength="4"
 								onpaste="return false;" type="text">
 								<div>
-									<span id="increase" class="increase">&nbsp;</span> <span
-										id="decrease" class="decrease">&nbsp;</span>
+									<span id="increase" class="increase" onclick="add()">&nbsp;</span> <span
+										id="decrease" class="decrease" onclick="reduce()">&nbsp;</span>
 								</div>
 						</dd>
 						<dd>件</dd>
@@ -130,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<img
 						src="${pageContext.request.contextPath}/<s:property value="#p.image"/> ">
 					<p>
-						<s:property  value="#p.pdesc"/>
+						<s:property  value="#p.pdesc" escape="0"/>
 					</p>
 				</div>
 			</div>

@@ -27,7 +27,7 @@
 					<li class="current"></li>
 				</ul>
 			</div>
-			<s:set value="#request.orders.list" id="orders"></s:set>
+			<s:set value="orders.list" id="orders"></s:set>
 			<s:iterator value="#orders" id="order">
 				<table>
 					<tbody>
@@ -45,7 +45,7 @@
 										color="red">付款</font></a>
 								</s:if>
 								<s:elseif test="#order.state == 2">
-									已付款
+									<font color="orange">商家待发货</font>
 								</s:elseif>
 								<s:elseif test="#order.state == 3">
 									<a href="order_updateState.action?oid=<s:property value="#order.oid"/>"><font color="blue">确认收货</font></a>
@@ -53,7 +53,7 @@
 								<s:elseif test="#order.state == 4">
 									<font color="green">交易完成</font>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="order_deleteOrderByOid.action?oid=<s:property value="#order.oid"/>"><font color="red">删除该订单</font></a>
+									<a href="order_deleteOrderByOid.action?oid=<s:property value="#order.oid"/>"><font color="red">删除</font></a>
 								</s:elseif>
 							</span>
 						</tr>
@@ -87,7 +87,7 @@
 				</div>
 			</s:iterator>
 			<div class="pagination">
-					<s:set value="#request.orders" id="orders"></s:set>
+					<s:set value="orders" id="orders"></s:set>
 					<s:if test="#orders != null">
 						<span>第 <s:property value="%{#orders.currentPage}"/>/<s:property value="%{#orders.totalPage}"/> 页</span>
 						<s:if test="#orders.currentPage != 1">

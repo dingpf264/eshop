@@ -43,6 +43,7 @@
 		<action name="index" class="indexAction">
 			<result name="index">/WEB-INF/jsp/index.jsp</result>
 		</action>
+		<action name="ckeditorUpload" class="ckeditorUpload"></action>
 		
 		<!-- 配置用户模块 -->
 		<action name="user_*" class="userAction" method="{1}">
@@ -78,7 +79,7 @@
 			<result name="save">/WEB-INF/jsp/order.jsp</result>
 			<result name="findOrders">/WEB-INF/jsp/orderList.jsp</result>
 			<result name="updateStateSuccess" type="redirectAction">order_findOrders.action?currentPage=1</result>
-			<result name="deleteOrderByOid">/WEB-INF/jsp/orderList.jsp</result>
+			<result name="deleteOrderByOid" type="redirectAction">order_findOrders.action?currentPage=1</result>
 			<result name="findOrderDetailByOid">/WEB-INF/jsp/orderdetail.jsp</result>
 		</action>
 		

@@ -75,13 +75,13 @@
 			<img src="${pageContext.request.contextPath }/image/year.png" alt="" style="width: 1200px; height: 110px; position: relative; left: -90px;">
 		</div>
 		<div style="width:618px;height:50px;margin:20px 30px 20px 160px;">
-			<table cellspacing=1 cellpadding=3 align=center class=tableBorder2>
+			<table cellspacing=1 cellpadding=3 align=center class=tableBorder2 style="background-color: white;border: none;">
 				<tr>
-					<td height=40 valign=middle align=left >
-				      <input style="line-height:40px; font-size:14px;border-color: red;border-style: solid;border-width: 1px;" type="text" id="name" size="70" height="50px" placeholder="请输入您要查询的商品名称"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td height=30 valign=middle align=left >
+				      <input style="line-height:30px; font-size:14px;border-color: red;border-style: solid;border-width: 1px;" type="text" id="name" size="70" height="30px" placeholder="请输入您要查询的商品名称"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				    </td>
-				    <td height=40 valign=middle align=left>
-				      <input type="button" value="搜索" style="line-height:40px;font-size:18px;height:40px" onclick="search()"/>
+				    <td height=30 valign=middle align=left style="text-align: left;">
+				      <input type="button" value="搜索" style="line-height:30px;font-size:18px;height:30px" onclick="search()"/>
 				    </td>
 				</tr>
 			</table>

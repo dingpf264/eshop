@@ -69,4 +69,8 @@ public class CategorySecondService implements ICategorySecondService {
 		return categorySecondDAO.findAll();
 	}
 
+	@Override
+	public List<Categorysecond> findCs(int cid){
+		return categorySecondDAO.findCs(cid);
+	}
 }

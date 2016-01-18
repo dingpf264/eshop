@@ -50,7 +50,7 @@ public class MailUitls {
 			message.setSubject("来自欢乐购商城官方激活邮件");
 			// 设置邮件正文:
 			message.setContent(
-					"<h1>欢乐购商城官方激活邮件!点下面链接完成激活操作!</h1><h3><a href='http://192.168.1.104:8090/eshop/user_active.action?code="
+					"<h1>欢乐购商城官方激活邮件!点下面链接完成激活操作!</h1><h3><a href='http://192.168.30.1:8090/eshop/user_active.action?code="
 							+ code
 							+ "'>http://192.168.1.104:8090/eshop/user_active.action?code="
 							+ code + "</a></h3>", "text/html;charset=UTF-8");

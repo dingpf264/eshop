@@ -70,6 +70,7 @@
 		<property name="categoryService" ref="categoryService"></property>
 		<property name="productService" ref="productService"></property>
 	</bean>
+	<bean id="ckeditorUpload" class="com.rhwayfun.eshop.user.action.CkeditorUpload" scope="prototype"></bean>
 	<bean id="userAction" class="com.rhwayfun.eshop.user.action.UserAction"
 		scope="prototype">
 		<property name="userService" ref="userService"></property>
@@ -97,6 +98,7 @@
 	<bean id="adminProductAction" class="com.rhwayfun.eshop.admin.product.action.AdminProductAction" scope="prototype">
 		<property name="adminProductService" ref="adminProductService"></property>
 		<property name="categorySecondService" ref="categorySecondService"></property>
+		<property name="categoryService" ref="categoryService"></property>
 	</bean>
 	<bean id="adminOrderAction" class="com.rhwayfun.eshop.admin.order.action.AdminOrderAction" scope="prototype">
 		<property name="adminOrderService" ref="adminOrderService"></property>

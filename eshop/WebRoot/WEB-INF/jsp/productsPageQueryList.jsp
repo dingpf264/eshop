@@ -17,12 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<%@ include file="head.jsp" %>
-	<span style="margin-left:400px;">总共为您找到<s:property value="pList.totalCount"/>件相关宝贝</span>
+	<div style="margin:30px 500px;">
+		<span >总共为您找到<font color="red" size="14px"><s:property value="pList.totalCount"/></font>件相关宝贝</span>
+	</div>
 	<div class="container productList" style="margin-top:15px;">
-		<div class="span18 last" style="width:950px;">
+		<div class="span18 last" style="width:900px;">
 			<form id="productForm"
-				action="" method="get" style="width:950px;">
-				<div id="result" class="result table clearfix" style="width:950px;">
+				action="" method="get" style="width:900px;">
+				<div id="result" class="result table clearfix" style="width:900px;">
 					<ul>
 						<s:set value="pList.list" id="ps"></s:set>
 						<s:if test="#ps != null">
