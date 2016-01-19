@@ -134,6 +134,7 @@
 			<result name="update" type="redirectAction">adminProduct_findAllByPage.action?currentPage=1</result>
 			<result name="delete" type="redirectAction">adminProduct_findAllByPage.action?currentPage=1</result>
 			<result name="findPageProductsByName">/admin/product/queryList.jsp</result>
+			<result name="batchDeleteSuccess" type="redirectAction">adminProduct_findAllByPage.action?currentPage=1</result>
 			<interceptor-ref name="AdminLoginStack"></interceptor-ref>
 		</action>
 		

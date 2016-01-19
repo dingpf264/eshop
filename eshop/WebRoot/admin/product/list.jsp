@@ -2,21 +2,57 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <HTML>
 <HEAD>
-<meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${pageContext.request.contextPath}/css/Style1.css"
+	<meta http-equiv="Content-Language" content="zh-cn">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="${pageContext.request.contextPath}/css/Style1.css"
 	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/common.css"
+	<link href="${pageContext.request.contextPath}/css/common.css"
 	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/cart.css"
+	<link href="${pageContext.request.contextPath}/css/cart.css"
 	rel="stylesheet" type="text/css" />
-<script language="javascript"
+	<script language="javascript"
 	src="${pageContext.request.contextPath}/js/public.js"></script>
-<script type="text/javascript">
-			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+	<script type="text/javascript">
+		window.onload = function () {
+			var checkInputs = document.getElementsByClassName('check');
+		    var checkAllInputs = document.getElementsByClassName('check-all');
+			for (var i = 0 , len = checkInputs.length; i < len; i++) {
+		        checkInputs[i].onclick = function () {
+		            if (this.className === 'check-all check') {
+		                for (var j = 0; j < checkInputs.length; j++) {
+		                    checkInputs[j].checked = this.checked;
+		                }
+		            }
+		            if (this.checked == false) {
+		                for (var k = 0; k < checkAllInputs.length; k++) {
+		                    checkAllInputs[k].checked = false;
+		                }
+		            }
+		        };
+		    }
+		};
+		
+		function doDelete(){
+			var checkProducts = document.getElementsByName("product");
+			var m = 0;
+			var n = false;
+			var p = new Array();
+			for(var i = 0; i < checkProducts.length; i++){
+				if(checkProducts[i].checked){
+					n =true;
+					p[m++] = checkProducts[i].value;
+				}
 			}
-		</script>
+			if(!n){
+				alert("亲，请至少选择一个商品O(∩_∩)O~");
+			}
+			location.href="${pageContext.request.contextPath}/adminProduct_batchDelete.action?p=" + p;
+		}
+		
+		function addProduct(){
+			window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+		}
+	</script>
 </HEAD>
 <body>
 	<br>
@@ -31,7 +67,12 @@
 							列 表</strong></TD>
 				</tr>
 				<tr>
-					<td class="ta_01" align="right">
+					<td class="ta_01" align="left">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="delete" name="delete" value="删除"
+						 onclick="doDelete()">
+							批量删除</button>
+							&nbsp;&nbsp;
 						<button type="button" id="add" name="add" value="添加"
 							class="button_add" onclick="addProduct()">
 							&#28155;&#21152;</button>
@@ -44,19 +85,22 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
+								<td style="text-align:center;"><label><input class="check-all check"
+									type="checkbox" />&nbsp;全选</label></td>
 								<td align="center" width="8%">序号</td>
 								<td align="center" width="12%">商品名称</td>
 								<td align="center" width="12%">市场价</td>
 								<td align="center" width="12%">商城价</td>
 								<td align="center" width="12%">图片</td>
-								<td align="center" width="14%">商品简介</td>
 								<td align="center" width="8%">是否热门</td>
-								<td width="7%" align="center">编辑</td>
-								<td width="7%" align="center">删除</td>
+								<td width="8%" align="center">编辑</td>
+								<td width="8%" align="center">删除</td>
 							</tr>
 							<s:iterator var="p" value="pList.list" status="status">
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td class="checkbox" style="text-align:center;"><input class="check-one check"
+									type="checkbox" name="product" value="<s:property value='#p.pid'/>"/></td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="8%"><s:property value="#status.count" /></td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
@@ -67,12 +111,12 @@
 										width="12%"><s:property value="#p.shopPrice" /></td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="12%">
-										<img
+										<a target="_blank" href="product_findDetail.action?pid=<s:property value='#p.pid'/>" title="点击预览商品简介">
+										<img 
 											src="${pageContext.request.contextPath}/<s:property value="#p.image" />"
 											border="0" style="CURSOR: hand" width="60px" height="50px">	
+										</a>
 									</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="12%"><s:property value="#p.pdesc" escape="0"/></td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="12%">
 										<s:if test="#p.isHot == 1">

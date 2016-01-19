@@ -24,6 +24,7 @@ import com.rhwayfun.eshop.category.entity.Category;
 import com.rhwayfun.eshop.category.entity.Categorysecond;
 import com.rhwayfun.eshop.category.service.ICategoryService;
 import com.rhwayfun.eshop.product.entity.Product;
+import com.rhwayfun.eshop.product.service.IProductService;
 import com.rhwayfun.eshop.utils.PageBean;
 
 public class AdminProductAction implements ModelDriven<Product>{
@@ -44,7 +45,16 @@ public class AdminProductAction implements ModelDriven<Product>{
 	private InputStream inputStream;
 	private int cid;
 	private String data;
+	private String p;
 	
+	public String getP() {
+		return p;
+	}
+
+	public void setP(String p) {
+		this.p = p;
+	}
+
 	public String getData() {
 		return data;
 	}
@@ -120,7 +130,7 @@ public class AdminProductAction implements ModelDriven<Product>{
 	private IAdminProductService adminProductService;
 	private ICategorySecondService categorySecondService;
 	private ICategoryService categoryService;
-	
+
 	public void setCategoryService(ICategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
@@ -307,5 +317,19 @@ public class AdminProductAction implements ModelDriven<Product>{
 		}	*/
 
 		return null;
+	}
+	
+	public String batchDelete() throws Exception{
+		String[] ps = p.split(",");
+		for (String pid_s : ps) {
+			Product currProduct = adminProductService.findByPid(Integer.valueOf(pid_s));
+			//获取上传图片的物理路径
+			String realPath = ServletActionContext.getServletContext()
+					.getRealPath("/") + product.getImage();
+			File diskFile = new File(realPath);
+			diskFile.delete();
+			adminProductService.delete(currProduct);
+		}
+		return "batchDeleteSuccess";
 	}
 }

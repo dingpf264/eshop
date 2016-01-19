@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CkeditorUpload extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
+	
 	private File upload;
 	private String uploadContentType;
 	private String uploadFileName;
@@ -41,6 +43,7 @@ public class CkeditorUpload extends ActionSupport{
 	}
 	@Override
 	public String execute() throws Exception {
+		
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("UTF-8");
@@ -73,6 +76,7 @@ public class CkeditorUpload extends ActionSupport{
 		//上传图片
 		InputStream is = new FileInputStream(upload);
 		String uploadpath = ServletActionContext.getServletContext().getRealPath("/products");
+		System.out.println("上传路径：" + uploadpath);
 		String fileName = java.util.UUID.randomUUID().toString();
 		
 		fileName += expandName;
